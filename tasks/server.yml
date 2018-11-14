@@ -7,10 +7,12 @@
 
 - name: define startup password
   copy:
-    dest: "~/.one/one_auth"
+    dest: "~oneadmin/.one/one_auth"
     content: "{{ one_default_admin_password }}"
     force: no
-  become_user: oneadmin
+    mode: 0600
+    owner: oneadmin
+    group: oneadmin
   notify: restart_server
 
 - name: start server service
