@@ -5,12 +5,8 @@
     state: present
   with_items: "{{ one_sunstone_packages }}"
 
-- name: enable sunstone service
-  service:
-    name: opennebula-sunstone
-    state: enabled
-
 - name: start server service
   service:
     name: opennebula-sunstone
     state: started
+    enabled: yes

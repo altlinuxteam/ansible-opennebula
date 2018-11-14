@@ -13,12 +13,8 @@
   become_user: oneadmin
   notify: restart_server
 
-- name: enable server service
-  service:
-    name: opennebula
-    state: enabled
-
 - name: start server service
   service:
     name: opennebula
     state: started
+    enabled: yes
