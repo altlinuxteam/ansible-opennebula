@@ -1,2 +1,13 @@
 ---
-# defaults file for opennebula
+one_default_admin_password: "adminpassword"
+
+one_common_packages: []
+
+one_server_packages:
+  - opennebula-server
+  - ruby-nokogiri
+
+one_sunstone_packages:
+  - opennebula-sunstone
+  - ruby-sinatra
+  - ruby-builder
