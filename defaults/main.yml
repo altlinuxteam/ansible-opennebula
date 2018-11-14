@@ -1,11 +1,11 @@
 ---
 one_default_admin_password: "adminpassword"
 
-one_common_packages: []
+one_common_packages:
+  - ruby-nokogiri
 
 one_server_packages:
   - opennebula-server
-  - ruby-nokogiri
 
 one_sunstone_packages:
   - opennebula-sunstone
