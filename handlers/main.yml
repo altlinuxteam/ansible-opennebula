@@ -4,3 +4,8 @@
   service:
     name: opennebula
     state: restarted
+
+- name: restart_sunstone
+  service:
+    name: opennebula-sunstone
+    state: restarted

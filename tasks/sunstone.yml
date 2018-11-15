@@ -5,6 +5,12 @@
     state: present
   with_items: "{{ one_sunstone_packages }}"
 
+- name: generate sunstone config
+  template:
+    dest: /etc/one/sunstone-server.conf
+    src: sunstone-server.conf.j2
+  notify: restart_sunstone
+
 - name: start server service
   service:
     name: opennebula-sunstone
