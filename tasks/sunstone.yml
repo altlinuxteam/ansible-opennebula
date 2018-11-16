@@ -5,6 +5,14 @@
     state: present
   with_items: "{{ one_sunstone_packages }}"
 
+- name: create .one directory
+  file:
+    path: "~oneadmin/.one/"
+    state: directory
+    owner: oneadmin
+    group: oneadmin
+    mode: 0750
+
 - name: define sunstone password
   copy:
     dest: "~oneadmin/.one/sunstone_auth"
