@@ -11,14 +11,14 @@
     state: directory
     owner: oneadmin
     group: oneadmin
-    mode: 0750
+    mode: "0750"
 
 - name: define sunstone password
   copy:
     dest: "~oneadmin/.one/sunstone_auth"
-    content: "{{ one_default_sunstone_password }}"
+    content: "{{ one_default_sunstone_user }}:{{ one_default_sunstone_password }}"
     force: no
-    mode: 0600
+    mode: "0600"
     owner: oneadmin
     group: oneadmin
   notify: restart_sunstone
