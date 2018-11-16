@@ -5,6 +5,25 @@
     state: present
   with_items: "{{ one_sunstone_packages }}"
 
+- name: define sunstone password
+  copy:
+    dest: "~oneadmin/.one/sunstone_auth"
+    content: "{{ one_default_sunstone_password }}"
+    force: no
+    mode: 0600
+    owner: oneadmin
+    group: oneadmin
+  notify: restart_server
+
+#TODO: remove this when the package be fixed
+- name: copy scripts_common to the node
+  copy:
+    src: "{{ role_path }}/files/scripts_common.rb"
+    dest: /usr/lib/one/ruby/scripts_common.rb
+    owner: root
+    group: root
+    mode: 644
+
 - name: generate sunstone config
   template:
     dest: /etc/one/sunstone-server.conf
