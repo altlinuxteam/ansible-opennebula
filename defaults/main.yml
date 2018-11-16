@@ -1,7 +1,5 @@
 ---
 one_default_admin_password: "adminpassword"
-one_default_sunstone_user: "serveradmin"
-one_default_sunstone_password: "adminpassword"
 one_server_entrypoint_address: "localhost"
 one_server_entrypoint_port: "2633"
 

@@ -13,15 +13,13 @@
     group: oneadmin
     mode: "0750"
 
-- name: define sunstone password
+- name: put sunstone_auth
   copy:
+    src: ".sunstone_auth"
     dest: "~oneadmin/.one/sunstone_auth"
-    content: "{{ one_default_sunstone_user }}:{{ one_default_sunstone_password }}"
-    force: no
     mode: "0600"
     owner: oneadmin
     group: oneadmin
-  notify: restart_sunstone
 
 #TODO: remove this when the package be fixed
 - name: copy scripts_common to the node

@@ -20,3 +20,9 @@
     name: opennebula
     state: started
     enabled: yes
+
+- name: fetch sunstone_auth from server
+  fetch:
+    src: "~oneadmin/.one/sunstone_auth"
+    dest: ".sunstone_auth"
+    flat: true
