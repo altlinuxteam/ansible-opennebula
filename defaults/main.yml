@@ -16,3 +16,5 @@ one_sunstone_packages:
 
 one_worker_kvm_packages:
   - opennebula-node-kvm
+  - libvirt
+  - libvirt-client
