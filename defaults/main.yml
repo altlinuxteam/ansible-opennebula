@@ -14,5 +14,5 @@ one_sunstone_packages:
   - ruby-sinatra
   - ruby-builder
 
-one_worker-kvm__packages:
+one_worker_kvm_packages:
   - opennebula-node-kvm
