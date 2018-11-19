@@ -3,4 +3,4 @@
   package:
     name: "{{ item }}"
     state: present
-  with_items: "{{ one_worker_kvm__packages }}"
+  with_items: "{{ one_worker_kvm_packages }}"
