@@ -13,3 +13,6 @@ one_sunstone_packages:
   - opennebula-sunstone
   - ruby-sinatra
   - ruby-builder
+
+one_worker-kvm__packages:
+  - opennebula-node-kvm

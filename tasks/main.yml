@@ -12,3 +12,7 @@
 - name: deploy sunstone
   include_tasks: sunstone.yml
   when: one_flavor == 'sunstone'
+
+- name: deploy worker-kvm
+  include_tasks: worker-kvm.yml
+  when: one_flavor == 'worker-kvm'

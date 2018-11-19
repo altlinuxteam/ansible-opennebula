@@ -1,0 +1,6 @@
+---
+- name: install kvm packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ one_worker-kvm__packages }}"
