@@ -36,7 +36,7 @@
   authorized_key:
     user: oneadmin
     state: present
-    key: "{{ lookup('file', '{{ item }}') }}"
+    key: "{{ lookup('file', item) }}"
   with_fileglob:
     - "*_id_ed25519.pub"
   when: one_flavor == 'distribute_keys'
