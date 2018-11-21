@@ -17,14 +17,18 @@
   include_tasks: worker-kvm.yml
   when: one_flavor == 'worker-kvm'
 
-- name: generate ssh key
-  command: ssh-keygen -t ed25519 -f ~oneadmin/.ssh/id_ed25519 -N ""
-  creates: ~oneadmin/.ssh/id_ed25519
+- name: generate and store keys
+  block:
+    - name: generate ssh key
+      command: ssh-keygen -t ed25519 -f ~oneadmin/.ssh/id_ed25519 -N ""
+      creates: ~oneadmin/.ssh/id_ed25519
 
-- name: fetch generated public key
-  fetch:
-    src: "~oneadmin/.ssh/id_ed25519.pub"
-    dest: ".{{ inventory_hostname_short }}_id_ed25519.pub"
+    - name: fetch generated public key
+      fetch:
+        src: "~oneadmin/.ssh/id_ed25519.pub"
+        dest: ".{{ inventory_hostname_short }}_id_ed25519.pub"
+  when: one_flavor != 'distribute_keys'
+
 
 - name: distribute public keys
   authorized_key:
