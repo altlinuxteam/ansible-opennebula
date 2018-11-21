@@ -21,6 +21,8 @@
   command: ssh-keygen -t ed25519 -f ~oneadmin/.ssh/id_ed25519 -N ""
   args:
     creates: ~oneadmin/.ssh/id_ed25519
+  become: yes
+  become_user: oneadmin
 
 - name: fetch generated public key
   fetch:
