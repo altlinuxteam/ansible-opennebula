@@ -4,3 +4,9 @@
     name: "{{ item }}"
     state: present
   with_items: "{{ one_worker_kvm_packages }}"
+
+- name: start libvirtd
+  service:
+    name: libvirtd
+    state: started
+    enabled: yes
