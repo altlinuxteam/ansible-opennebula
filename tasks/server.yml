@@ -10,7 +10,7 @@
     dest: "~oneadmin/.one/one_auth"
     content: "{{ one_default_admin_password }}"
     force: no
-    mode: 0600
+    mode: 0644
     owner: oneadmin
     group: oneadmin
   notify: restart_server
@@ -20,6 +20,12 @@
     name: opennebula
     state: started
     enabled: yes
+
+- name: wait for server to generate sunstone_auth
+  wait_for:
+    path: "~oneadmin/.one/sunstone_auth"
+    state: present
+    timeout: 60
 
 - name: fetch sunstone_auth from server
   fetch:
