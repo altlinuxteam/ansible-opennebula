@@ -21,7 +21,8 @@
   block:
     - name: generate ssh key
       command: ssh-keygen -t ed25519 -f ~oneadmin/.ssh/id_ed25519 -N ""
-      creates: ~oneadmin/.ssh/id_ed25519
+      args:
+        creates: ~oneadmin/.ssh/id_ed25519
 
     - name: fetch generated public key
       fetch:
