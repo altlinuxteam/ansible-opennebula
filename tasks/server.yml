@@ -8,7 +8,7 @@
 - name: define startup password
   copy:
     dest: "~oneadmin/.one/one_auth"
-    content: "{{ one_default_admin_password }}"
+    content: "oneadmin:{{ one_default_admin_password }}"
     force: yes
     mode: 0644
     owner: oneadmin
