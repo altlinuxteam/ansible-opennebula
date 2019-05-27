@@ -14,6 +14,42 @@
 - name: configure worker`s networks
   include_tasks: configure_workers_network.yml
 
+- name: create integrational ovs bridge interface
+  file:
+    path: "/etc/net/ifaces/{{one_ovs_trans_br}}"
+    state: directory
+
+- name: move ipaddress from ethX to bridge
+  shell: |
+    if [[ -f /etc/net/ifaces/{{one_ovs_trans_port}}/ipv4address ]]; then
+      mv /etc/net/ifaces/{{one_ovs_trans_port}}/ipv4address /etc/net/ifaces/{{one_ovs_trans_br}}/
+      echo "address_moved"
+    fi
+  register: result
+  changed_when: '"address" in result.stdout'
+
+
+- name: make config for ovs bridge interface
+  template:
+    src: "trans_br.j2"
+    dest: "/etc/net/ifaces/{{one_ovs_trans_br}}/options"
+
+- name: make config for ovs bridge port
+  template:
+    src: "trans_port.j2"
+    dest: "/etc/net/ifaces/{{one_ovs_trans_port}}/options"
+
+- name: restart network service
+  service:
+    name: network
+    state: restarted
+
+- name: create ovs integration bridge
+  shell: |
+    ovs-vsctl br-exists {{one_ovs_int_br}} || (ovs-vsctl add-br {{one_ovs_int_br}}; echo "bridge_created")
+  register: result
+  changed_when: '"bridge_created" in result.stdout'
+
 - name: check if this node already registered
   shell: "onehost list --list NAME --csv | grep -q {{inventory_hostname_short}}"
   ignore_errors: true

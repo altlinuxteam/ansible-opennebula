@@ -5,6 +5,15 @@
     state: present
   with_items: "{{ one_common_packages }}"
 
+- name: change hostname in sysconfig
+  lineinfile:
+    path: /etc/sysconfig/network
+    regexp: '^HOSTNAME='
+    line: "HOSTNAME={{inventory_hostname_short}}"
+
+- name: set hostname
+  shell: "hostname {{inventory_hostname_short}}"
+
 - name: deploy server
   include_tasks: server.yml
   when: one_flavor == 'server'
@@ -44,3 +53,7 @@
       with_items:
         - "{{ groups['all'] }}"
   when: one_flavor == 'distribute_keys'
+
+- name: integrate workers
+  include_tasks: integrate_workers.yml
+  when: one_flavor == 'integrate_workers'

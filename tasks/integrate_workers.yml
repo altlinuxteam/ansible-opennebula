@@ -1,0 +1,8 @@
+---
+- name: integrate ovs bridges
+  shell: |
+    ovs-vsctl list-ports {{one_ovs_int_br}} | grep -q "{{item.key}}_int" || \
+      (ovs-vsctl add-port {{one_ovs_int_br}} {{item.key}}_int -- set Interface {{item.key}}_int type=vxlan options:remote_ip={{item.value.ip4addr}}; echo ovs_changed)
+  register: result
+  changed_when: '"ovs_changed" in result.stdout'
+  with_dict: "{{stack.nodes | get_nic_addr_with_name(inventory_hostname_short, one_ovs_int_br)}}"
