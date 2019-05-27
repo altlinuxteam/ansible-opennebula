@@ -4,7 +4,12 @@ one_server_entrypoint_address: "localhost"
 one_server_entrypoint_port: "2633"
 
 one_common_packages:
-  - ruby-nokogiri
+  - opennebula-common
+  - gem-opennebula
+#  - ruby-nokogiri
+
+one_management_packages:
+  - gem-opennebula-cli
 
 one_server_packages:
   - opennebula-server

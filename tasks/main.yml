@@ -17,6 +17,10 @@
   include_tasks: worker-kvm.yml
   when: one_flavor == 'worker-kvm'
 
+- name: deploy management node
+  include_tasks: management.yml
+  when: one_flavor == 'management'
+
 - name: generate ssh key
   command: ssh-keygen -t ed25519 -f ~oneadmin/.ssh/id_ed25519 -N ""
   args:

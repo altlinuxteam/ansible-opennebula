@@ -1,0 +1,17 @@
+---
+- name: install sunstone packages
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ one_management_packages }}"
+
+- name: create .one directory
+  file:
+    path: "~oneadmin/.one/"
+    state: directory
+    owner: oneadmin
+    group: oneadmin
+    mode: "0750"
+
+- name: initial cluster configuration
+  include_tasks: initial_configuration.yml

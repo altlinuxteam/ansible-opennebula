@@ -5,6 +5,14 @@
     state: present
   with_items: "{{ one_server_packages }}"
 
+  #- name: create .one directory
+  #file:
+  #  path: "~oneadmin/.one"
+  #  state: directory
+  #  owner: oneadmin
+  #  group: oneadmin
+  #  mode: '0700'
+
 - name: define startup password
   copy:
     dest: "~oneadmin/.one/one_auth"

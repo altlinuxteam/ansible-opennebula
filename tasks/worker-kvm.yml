@@ -10,3 +10,18 @@
     name: libvirtd
     state: started
     enabled: yes
+
+- name: configure worker`s networks
+  include_tasks: configure_workers_network.yml
+
+- name: check if this node already registered
+  shell: "onehost list --list NAME --csv | grep -q {{inventory_hostname_short}}"
+  ignore_errors: true
+  changed_when: false
+  register: is_not_registered
+  delegate_to: "{{one_management_host}}"
+
+- name: register kvm node on controller
+  shell: "onehost create --vm kvm --im kvm --cluster {{one_cluster_name}} {{inventory_hostname_short}}"
+  delegate_to: "{{one_management_host}}"
+  when: is_not_registered.rc != 0

@@ -1,0 +1,16 @@
+---
+- name: check if this node already registered
+  shell: "onecluster list --list NAME --csv | grep -q {{one_cluster_name}}"
+  ignore_errors: true
+  changed_when: false
+  register: rename_default_cluster
+
+- name: "rename default cluster to {{one_cluster_name}}"
+  shell: "onecluster rename 0 {{one_cluster_name}}"
+  when: rename_default_cluster.rc != 0
+
+- name: "create groups"
+  include: create_group.yml
+  with_items: "{{ one_groups }}"
+  loop_control:
+    loop_var: group_name

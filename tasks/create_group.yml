@@ -1,0 +1,10 @@
+---
+- name: "check if {{group_name}} already exists"
+  shell: "onegroup list --list NAME --csv | grep -q {{group_name}}"
+  ignore_errors: true
+  changed_when: false
+  register: add_group
+
+- name: "create {{group_name}} group"
+  shell: "onegroup create {{group_name}}"
+  when: add_group.rc != 0
